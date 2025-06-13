@@ -6,10 +6,10 @@ const TemperatureButton = ({ unit, currentUnit, onClick }) => {
       onClick={() => onClick(unit)}
       aria-pressed={currentUnit === unit}
       aria-label={`switch to ${unit}°`}
-      className={`px-3 py-1 rounded transition-all duration-200 ${
+      className={`px-3 py-1 rounded transition-all duration-200 text-[rgb(var(--primary-text-rgb))] ${
         currentUnit === unit
-          ? "bg-[#4e4e4e] text-white shadow-md"
-          : "text-gray-400 hover:text-gray-300 hover:bg-[#2a2a2a]"
+          ? "bg-sky-700 shadow-md"
+          : "bg-[#3f3f3f] hover:bg-[#4a4a4a]"
       }`}
     >
       {unit}°
@@ -20,7 +20,7 @@ const TemperatureButton = ({ unit, currentUnit, onClick }) => {
 const TemperatureToggle = ({ unit, onToggle }) => {
   return (
     <div
-      className="flex items-center bg-[#363636] rounded-lg p-1"
+      className="flex items-center bg-[#2a2a2a] rounded-lg p-1"
       role="radiogroup"
       aria-label="Temperature unit"
     >

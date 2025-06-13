@@ -9,14 +9,14 @@ import {
 } from "react-icons/fa";
 
 const HighlightCard = ({ icon: Icon, title, value, unit = "" }) => (
-  <div className="bg-[#1e1e1e] rounded-lg p-4">
-    <div className="flex items-center gap-2 text-gray-400 mb-2">
+  <div className="bg-[#3f3f3f] rounded-lg p-4">
+    <div className="flex items-center gap-2 text-[rgb(var(--secondary-text-rgb))] mb-2">
       <Icon className="text-lg" />
       <span className="text-sm">{title}</span>
     </div>
-    <div className="text-xl font-semibold">
+    <div className="text-xl font-semibold text-[rgb(var(--primary-text-rgb))]">
       {value}
-      {unit && <span className="text-sm text-gray-400 ml-1">{unit}</span>}
+      {unit && <span className="text-sm text-[rgb(var(--secondary-text-rgb))] ml-1">{unit}</span>}
     </div>
   </div>
 );
@@ -27,8 +27,8 @@ const Highlights = ({ highlights }) => {
   const { wind, humidity, visibility, sunrise, sunset, uv } = highlights;
 
   return (
-    <div className="flex-1 bg-[#1e1e1e] rounded-xl p-6">
-      <h2 className="text-xl font-semibold mb-4">Today&apos;s Highlights</h2>
+    <div className="flex-1 bg-[#2a2a2a] rounded-xl p-6 shadow-lg">
+      <h2 className="text-xl font-semibold mb-4 text-[rgb(var(--primary-text-rgb))]">Today&apos;s Highlights</h2>
       <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
         <HighlightCard
           icon={FaWind}
