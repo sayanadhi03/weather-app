@@ -25,9 +25,9 @@ const ForecastCard = ({ day, unit }) => {
   const description = day.weather[0]?.description;
 
   return (
-    <div className="bg-[#1e1e1e] rounded-lg p-4 flex flex-col items-center">
-      <div className="text-sm text-gray-300">{date.format("ddd")}</div>
-      <div className="text-xs text-gray-400">{date.format("MMM D")}</div>
+    <div className="bg-[#2a2a2a] rounded-lg p-5 flex flex-col items-center shadow-lg">
+      <div className="text-sm text-[rgb(var(--primary-text-rgb))]">{date.format("ddd")}</div>
+      <div className="text-xs text-[rgb(var(--secondary-text-rgb))]">{date.format("MMM D")}</div>
 
       <img
         src={`https://openweathermap.org/img/wn/${weatherIcon}.png`}
@@ -35,18 +35,18 @@ const ForecastCard = ({ day, unit }) => {
         className="w-12 h-12 my-2"
       />
 
-      <div className="text-sm font-semibold">
+      <div className="text-sm font-semibold text-[rgb(var(--primary-text-rgb))]">
         {formatTemperature(temp, unit)}
       </div>
 
-      <div className="text-xs text-gray-300">
+      <div className="text-xs text-[rgb(var(--secondary-text-rgb))]">
         {formatTemperature(minTemp, unit)} / {formatTemperature(maxTemp, unit)}
       </div>
 
-      <div className="text-xs text-gray-400 capitalize mt-1">{description}</div>
+      <div className="text-xs text-[rgb(var(--secondary-text-rgb))] capitalize mt-1">{description}</div>
 
-      <div className="flex items-center gap-1 text-xs text-gray-300 mt-2">
-        <FaWind className="text-xs" />
+      <div className="flex items-center gap-1 text-xs text-[rgb(var(--secondary-text-rgb))] mt-2">
+        <FaWind className="text-xs text-[rgb(var(--secondary-text-rgb))]" />
         <span>{day.wind.speed} m/s</span>
       </div>
     </div>

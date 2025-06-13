@@ -32,11 +32,11 @@ const SearchBar = ({ location, setLocation }) => {
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search for a city..."
         disabled={isLoading}
-        className="w-64 py-2 pl-4 pr-10 rounded-lg bg-[#1e1e1e] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-64 py-2 pl-4 pr-10 rounded-lg bg-[#3f3f3f] text-[rgb(var(--primary-text-rgb))] border border-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-500 placeholder:text-[rgb(var(--secondary-text-rgb))]"
       />
       <button
         type="submit"
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 disabled:opacity-50"
+        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[rgb(var(--primary-text-rgb))] hover:text-[rgb(var(--secondary-text-rgb))] disabled:opacity-50"
         disabled={isLoading}
         aria-label="Search"
       >
