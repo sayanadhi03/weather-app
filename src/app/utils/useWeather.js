@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import weatherApi from "./weatherApi";
+import { getAirQuality } from "./getAirQuality";
 
 export const useWeather = (initialLocation = "New York") => {
   const [weather, setWeather] = useState(null);
   const [highlights, setHighlights] = useState(null);
+  const [airQuality, setAirQuality] = useState(null);
+
   const [location, setLocation] = useState(initialLocation);
   const [forecast, setForecast] = useState(null);
   const [citiesWeather, setCitiesWeather] = useState([]);
@@ -15,7 +18,7 @@ export const useWeather = (initialLocation = "New York") => {
   });
   const [error, setError] = useState(null);
   const [cityError, setCityError] = useState(null);
-  const [cities, setCities] = useState(["London", "Tokyo"]); // Empty array by default
+  const [cities, setCities] = useState(["London", "Tokyo"]);
 
   const processHighlights = (weatherData) => {
     const { wind, main, visibility, sys } = weatherData;
@@ -55,6 +58,16 @@ export const useWeather = (initialLocation = "New York") => {
       const weatherData = await weatherApi.getCurrentWeather(loc);
       setWeather(weatherData);
       setHighlights(processHighlights(weatherData));
+
+      // Get air quality using lat/lon
+      const { coord } = weatherData;
+      const airQualityData = await getAirQuality(
+        coord.lat,
+        coord.lon,
+        process.env.NEXT_PUBLIC_API_KEY
+      );
+
+      setWeather({ ...weatherData, airQuality: airQualityData });
       console.log("Weather data received:", weatherData);
     } catch (err) {
       console.error("Error fetching weather:", err);
@@ -65,7 +78,6 @@ export const useWeather = (initialLocation = "New York") => {
   };
 
   const fetchForecast = async () => {
-    console.log("Fetching forecast for:", location);
     if (!location) {
       console.log("No location for forecast");
       return;
@@ -90,9 +102,7 @@ export const useWeather = (initialLocation = "New York") => {
   };
 
   const fetchCitiesWeather = async () => {
-    if (cities.length === 0) {
-      return;
-    }
+    if (cities.length === 0) return;
 
     setLoading((prev) => ({ ...prev, cities: true }));
     setCityError(null);
@@ -116,7 +126,6 @@ export const useWeather = (initialLocation = "New York") => {
   };
 
   useEffect(() => {
-    // Debounce location changes to prevent rapid API calls
     const timer = setTimeout(() => {
       fetchWeather(location);
       fetchForecast();
@@ -126,7 +135,6 @@ export const useWeather = (initialLocation = "New York") => {
   }, [location]);
 
   useEffect(() => {
-    // Debounce cities changes to prevent rapid API calls
     const timer = setTimeout(() => {
       fetchCitiesWeather();
     }, 500);
@@ -153,6 +161,8 @@ export const useWeather = (initialLocation = "New York") => {
   return {
     weather,
     highlights,
+    airQuality,
+    setAirQuality,
     location,
     setLocation,
     forecast,

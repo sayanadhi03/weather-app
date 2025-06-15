@@ -6,6 +6,8 @@ import { useWeather } from "./utils/useWeather";
 import WeatherApp from "./components/WeatherApp";
 import Highlights from "./components/Highlights";
 import OtherCountriesWeather from "./components/OtherCountriesWeather";
+import AirQuality from "./components/AirQuality";
+import { getAirQuality } from "./utils/getAirQuality";
 
 export default function Home() {
   const {
@@ -98,7 +100,12 @@ export default function Home() {
             />
           )}
 
-          {highlights && <Highlights highlights={highlights} />}
+          {highlights && (
+            <Highlights
+              highlights={highlights}
+              airQuality={weather?.airQuality}
+            />
+          )}
         </div>
 
         <div className="mt-6 flex flex-col md:flow-row gap-4">
